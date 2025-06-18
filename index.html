@@ -37,8 +37,8 @@
     <h1>청소년 대사질환 위험 자가진단</h1>
     <form id="surveyForm">
         <label>1. 키(cm)와 몸무게(kg)를 입력하세요</label>
-        <input type="number" id="height" placeholder="예: 170">
-        <input type="number" id="weight" placeholder="예: 65">
+        <input type="number" id="height" placeholder="예: 160">
+        <input type="number" id="weight" placeholder="예: 50">
 
         <label>2. 주간 운동 빈도를 선택하세요</label>
         <select id="exercise">
@@ -49,7 +49,7 @@
 
         <label>3. 아침식사 빈도를 선택하세요요</label>
         <select id="breakfast">
-            <option value="0">거의 매일 먹음</option>
+            <option value="0">매일 먹음</option>
             <option value="5">주 2~4회 먹음</option>
             <option value="10">주 0~1회 먹음</option>
         </select>
@@ -64,8 +64,8 @@
         <label>5. 수면 시간</label>
         <select id="sleep">
             <option value="0">7시간 이상</option>
-            <option value="5">6~7시간</option>
-            <option value="10">< 6시간 미만</option>
+            <option value="5">5~7시간</option>
+            <option value="10"> 5시간 이하</option>
         </select>
 
         <label>6. 가족 중 대사성 질환을 앓는 사람이 있는지 여부를 선택하세요</label>
@@ -92,7 +92,13 @@
     </form>
 
     <div class="result" id="result" style="display: none;"></div>
-
+<div class="disclaimer">
+        ※ 본 프로그램은 <br>
+        - 대한비만학회 『소아청소년 비만 진료지침』 (2022),<br>
+        - 질병관리청 『청소년건강행태조사 통계보고서』,<br>
+        - WHO 『Global Recommendations on Physical Activity for Health』 (2010)<br>
+        등을 참고하여 제작되었으며, 실제 임상 검사 결과와는 차이가 존재할 수 있습니다.
+    </div>
     <script>
         function calculateRisk() {
             let score = 0;
@@ -138,7 +144,7 @@
             } else if (score <= 40) {
                 riskLevel = "⚠️ 관심군";
                 suggestion = "일부 생활습관 개선이 필요합니다.";
-                condition = "생활습관성 질환 전단계";
+                condition = "비만, 고혈압, 혈당 이상 같은 질환으로 이어질 수 있는 초기 상태";
             } else if (score <= 60) {
                 riskLevel = "❗ 주의군";
                 suggestion = "식사/수면/운동 습관 개선이 강하게 권장됩니다.";
