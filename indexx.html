@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>청소년 대사질환 위험 자가진단</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 700px; margin: auto; }
+        h1 { color: #2c3e50; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select { margin-top: 5px; width: 100%; padding: 8px; box-sizing: border-box; }
+        button { margin-top: 20px; padding: 10px 20px; font-size: 16px; background-color: #2980b9; color: white; border: none; cursor: pointer; }
+        .result { margin-top: 30px; padding: 15px; background: #ecf0f1; border-left: 5px solid #2980b9; }
+        .tooltip { position: relative; display: inline-block; cursor: pointer; color: #2980b9; text-decoration: underline; }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #555;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>청소년 대사질환 위험 자가진단</h1>
+    <form id="surveyForm">
+        <label>1. BMI (체질량지수)</label>
+        <select id="bmi">
+            <option value="0">18.5 ~ 22.9 (정상)</option>
+            <option value="5">< 18.5 (저체중)</option>
+            <option value="10">23.0 ~ 24.9 (과체중)</option>
+            <option value="15">25.0 이상 (비만)</option>
+        </select>
+
+        <label>2. 주간 운동 빈도</label>
+        <select id="exercise">
+            <option value="0">주 4회 이상</option>
+            <option value="5">주 2~3회</option>
+            <option value="10">주 0~1회</option>
+        </select>
+
+        <label>3. 아침식사 결식 빈도</label>
+        <select id="breakfast">
+            <option value="0">거의 매일 먹음</option>
+            <option value="5">주 2~4회 먹음</option>
+            <option value="10">주 0~1회 먹음</option>
+        </select>
+
+        <label>4. 가공식품/단 음료 섭취 빈도</label>
+        <select id="sugar">
+            <option value="0">주 2회 이하</option>
+            <option value="5">주 3~5회</option>
+            <option value="10">주 6회 이상</option>
+        </select>
+
+        <label>5. 수면 시간</label>
+        <select id="sleep">
+            <option value="0">7~9시간</option>
+            <option value="5">6~6.9시간</option>
+            <option value="10">< 6시간</option>
+        </select>
+
+        <label>6. 가족력 (당뇨/고혈압/고지혈증)</label>
+        <select id="family">
+            <option value="0">없음</option>
+            <option value="10">있음</option>
+        </select>
+
+        <label>7. 음료 선택 습관</label>
+        <select id="drinks">
+            <option value="0">거의 안 마심</option>
+            <option value="5">주 1~3회</option>
+            <option value="10">주 4회 이상</option>
+        </select>
+
+        <label>8. 스트레스 수준</label>
+        <select id="stress">
+            <option value="0">낮음</option>
+            <option value="5">보통</option>
+            <option value="10">높음</option>
+        </select>
+
+        <button type="button" onclick="calculateRisk()">진단하기</button>
+    </form>
+
+    <div class="result" id="result" style="display: none;"></div>
+
+    <script>
+        function calculateRisk() {
+            const fields = ["bmi", "exercise", "breakfast", "sugar", "sleep", "family", "drinks", "stress"];
+            let score = 0;
+            let risks = [];
+            const messages = {
+                bmi: ["정상", "저체중", "과체중", "비만"],
+                exercise: ["활발한 운동 습관", "운동 부족", "운동 매우 부족"],
+                breakfast: ["규칙적 아침식사", "불규칙한 아침식사", "거의 아침을 거름"],
+                sugar: ["가공식품 섭취 적음", "중간 수준", "과다 섭취"],
+                sleep: ["충분한 수면", "약간 부족", "심각한 수면 부족"],
+                family: ["가족력 없음", "가족력 있음"],
+                drinks: ["단 음료 거의 없음", "적당함", "과다 섭취"],
+                stress: ["낮음", "보통", "높음"]
+            };
+
+            for (const id of fields) {
+                const value = parseInt(document.getElementById(id).value);
+                score += value;
+                if (value >= 10) risks.push(messages[id][2]);
+                else if (value >= 5) risks.push(messages[id][1]);
+            }
+
+            let riskLevel = "";
+            let suggestion = "";
+            let condition = "";
+
+            if (score <= 20) {
+                riskLevel = "✅ 낮은 위험군";
+                suggestion = "현재의 건강 습관을 잘 유지하세요.";
+                condition = "정상";
+            } else if (score <= 40) {
+                riskLevel = "⚠️ 관심군";
+                suggestion = "일부 생활습관 개선이 필요합니다.";
+                condition = "생활습관성 질환 전단계";
+            } else if (score <= 60) {
+                riskLevel = "❗ 주의군";
+                suggestion = "식사/수면/운동 습관 개선이 강하게 권장됩니다.";
+                condition = "<span class='tooltip'>대사증후군<span class='tooltiptext'>복부비만, 고혈압, 고혈당, 고중성지방 등 여러 대사 관련 질환이 동시에 나타나는 상태로 심혈관질환 위험이 높아집니다.</span></span> 가능성 있음";
+            } else {
+                riskLevel = "🚨 고위험군";
+                suggestion = "빠른 개선이 필요하며 전문적인 건강 상담을 고려하세요.";
+                condition = "<span class='tooltip'>제2형 당뇨병<span class='tooltiptext'>인슐린 저항성 증가로 인한 만성 질환으로, 조기에 관리하지 않으면 합병증 위험이 큽니다.</span></span> 등 심각한 질환 위험";
+            }
+
+            document.getElementById("result").innerHTML = `
+                <h3>총점: ${score}점</h3>
+                <p><strong>${riskLevel}</strong></p>
+                <p><strong>주요 위험 요인:</strong> ${risks.join(", ")}</p>
+                <p><strong>맞춤 피드백:</strong> ${suggestion}</p>
+                <p><strong>건강 위험:</strong> ${condition}</p>
+            `;
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+</body>
+</html>
