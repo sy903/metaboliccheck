@@ -53,7 +53,32 @@
             <option value="5">과일, 스포츠 음료</option>
             <option value="10">탄산/카페 음료</option>
         </select>
+<label>4. 가공식품(가당 음료 등) 섭취 빈도를 선택하세요요</label>
+        <select id="sugar">
+            <option value="0">주 2회 이하</option>
+            <option value="5">주 3~5회</option>
+            <option value="10">주 6회 이상</option>
+        </select>
 
+        <label>5. 평균 수면 시간을 선택하세요</label>
+        <select id="sleep">
+            <option value="0">7시간 이상</option>
+            <option value="5">5~7시간</option>
+            <option value="10">5시간 이하</option>
+        </select>
+
+        <label>6. 가족력 (당뇨/고혈압/고지혈증) 유무를 선택하세요</label>
+        <select id="family">
+            <option value="0">없음</option>
+            <option value="10">있음</option>
+        </select>
+
+        <label>7. 주로 마시는 음료를 선택하세요</label>
+        <select id="drinks">
+            <option value="0">물 등의 무가당 음료</option>
+            <option value="5">스포츠 음료, 주스 </option>
+            <option value="10">탄산, 카페 음료</option>
+        </select>
         <label>8. 스스로가 느끼는 스트레스 수준을 선택하세요</label>
         <select id="stress">
             <option value="0">낮음</option>
@@ -80,11 +105,11 @@
                 bmi: ["정상", "저체중", "과체중", "비만"],
                 exercise: ["활발한 운동 습관", "운동 부족", "운동 매우 부족"],
                 breakfast: ["규칙적 아침식사", "불규칙한 아침식사", "거의 아침을 거름"],
-                sugar: ["가공식품 섭취 적음", "중간 수준", "과다 섭취"],
+                sugar: ["가공식품 섭취 적음", "가공식품 섭취 중간 수준", "가공식품 과다 섭취"],
                 sleep: ["충분한 수면", "약간 부족", "심각한 수면 부족"],
                 family: ["가족력 없음", "가족력 있음"],
-                drinks: ["단 음료 거의 없음", "적당함", "과다 섭취"],
-                stress: ["낮음", "보통", "높음"]
+                drinks: ["단 음료 거의 없음", "단 음료 섭취 적당함", "단 음료 과다 섭취"],
+                stress: ["스트레스 낮음", "스트레스 보통", "스트레스 높음"]
             };
 
             // BMI 계산
