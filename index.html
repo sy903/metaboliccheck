@@ -49,34 +49,7 @@
 
         <label>3. 아침식사 빈도를 선택하세요</label>
         <select id="breakfast">
-            <option value="0">매일 먹음</option>
-            <option value="5">주 2~4회 먹음</option>
-            <option value="10">주 0~1회 먹음</option>
-        </select>
-
-        <label>4. 가공식품/단 음료 섭취 빈도를 선택하세요</label>
-        <select id="sugar">
-            <option value="0">주 2회 이하</option>
-            <option value="5">주 3~5회</option>
-            <option value="10">주 6회 이상</option>
-        </select>
-
-        <label>5. 수면 시간</label>
-        <select id="sleep">
-            <option value="0">7시간 이상</option>
-            <option value="5">5~7시간</option>
-            <option value="10"> 5시간 이하</option>
-        </select>
-
-        <label>6. 가족 중 대사성 질환을 앓는 사람이 있는지 여부를 선택하세요</label>
-        <select id="family">
-            <option value="0">없음</option>
-            <option value="10">있음</option>
-        </select>
-
-        <label>7. 주로 마시는 음료의 종류를 선택하세요</label>
-        <select id="drinks">
-            <option value="0">물 등의 무가당 음</option>
+         료</option>
             <option value="5">과일, 스포츠 음료</option>
             <option value="10">탄산/카페 음료</option>
         </select>
@@ -140,7 +113,7 @@
             if (score <= 20) {
                 riskLevel = "✅ 낮은 위험군";
                 suggestion = "현재의 건강 습관을 잘 유지하세요.";
-                condition = "정상";
+                condition = "없음";
             } else if (score <= 40) {
                 riskLevel = "⚠️ 관심군";
                 suggestion = "일부 생활습관 개선이 필요합니다.";
@@ -160,7 +133,7 @@
                 <p><strong>${riskLevel}</strong></p>
                 <p><strong>주요 위험 요인:</strong> ${risks.join(", ")}</p>
                 <p><strong>맞춤 피드백:</strong> ${suggestion}</p>
-                <p><strong>건강 위험:</strong> ${condition}</p>
+                <p><strong>관련 질환:</strong> ${condition}</p>
             `;
             document.getElementById("result").style.display = "block";
         }
